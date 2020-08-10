@@ -5,6 +5,7 @@ because Cl-Kraken use Dexador and Dexador takes so so long to detect that the ne
 # use
 
 put one per line api-key and api-secret in kraken.key
+
 load trade-with-kraken.lisp in repl
 
 public request:
