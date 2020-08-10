@@ -8,7 +8,7 @@
 (in-package :trade-with-kraken)
 
 ;; todo: check file exists                                              
-(with-open-file (stream "~/lisp/kraken.key")
+(with-open-file (stream "kraken.key")
   (defparameter *api-key* (read-line stream nil))
   (defparameter *api-secret* (read-line stream nil)))
 
