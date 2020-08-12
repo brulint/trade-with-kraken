@@ -1,3 +1,3 @@
 (defsystem :trade-with-kraken
-    :depends-on (:drakma :cl-kraken)
+    :depends-on (:cl-kraken)
     :components ((:file "trade-with-kraken")))

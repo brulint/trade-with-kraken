@@ -1,17 +1,51 @@
 # trade-with-kraken
 
-because Cl-Kraken use Dexador and Dexador takes so so long to detect that the network is unreachable
+another package to trade with kraken
 
-# use
+to contact kraken, you have two possibilities:
+- a get request to get public data
+- a post request with encrypted signature to get private data or to send orders
 
-put one per line api-key and api-secret in kraken.key
+__public request__
 
-load trade-with-kraken.lisp in repl
+you have the choice between drakma and dexador to send the request
 
-public request:
+```
+(map 'string #'code-char
+     (drakma:http-request "https://api.kraken.com/0/public/Ticker?pair=XXBTZEUR"))
+```
 
-```(map 'string #'code-char (trade-with-kraken:get-public "Ticker" '(("pair" . "XXBTZEUR"))))```
+```
+(dex:get "https://api.kraken.com/0/public/Ticker?pair=XXBTZEUR")
+```
 
-private request:
+__private request__
 
-```(map 'string #'code-char (trade-with-kraken:post-private "TradeBalance" '(("asset" . "ZEUR"))))```
+after putting api-key and api-secret (one per line, without quotation marks) in the file kraken.key and loading trade-with-kraken.lisp in repl, you're ready to use.
+
+__function signature__
+
+returns arguments needed to send a http resquet
+
+``` (trade-with-kraken:signature "TradeBalance" '(("asset" . "ZEUR"))) ```
+
+you have always the choice between drakma and dexador to send the request
+
+```
+(map 'string #'code-char
+     (multiple-value-bind (uri parameters headers) 
+         (trade-with-kraken:signature "TradeBalance" '(("asset" . "ZEUR")))
+       (drakma:http-request uri :method :post :parameters parameters :additional-headers headers)))
+```
+```
+(multiple-value-bind (uri content headers) 
+    (trade-with-kraken:signature "TradeBalance" '(("asset" . "ZEUR")))
+  (dex:post uri :content content :headers headers))
+```
+
+because Dexador takes so so long to detect that the network is unreachable, i will continue with drakma, but you do as you want ;)
+
+
+
+to be continued.
+
