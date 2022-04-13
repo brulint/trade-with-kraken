@@ -10,12 +10,12 @@ __public request__
 
 you have the choice between drakma and dexador to send the request
 
-```
+```lisp
 (map 'string #'code-char
      (drakma:http-request "https://api.kraken.com/0/public/Ticker?pair=XXBTZEUR"))
 ```
 
-```
+```lisp
 (dex:get "https://api.kraken.com/0/public/Ticker?pair=XXBTZEUR")
 ```
 
@@ -27,17 +27,17 @@ __function signature__
 
 returns arguments needed to send a http resquet
 
-``` (trade-with-kraken:signature "TradeBalance" '(("asset" . "ZEUR"))) ```
+```lisp (trade-with-kraken:signature "TradeBalance" '(("asset" . "ZEUR"))) ```
 
 you have always the choice between drakma and dexador to send the request
 
-```
+```lisp
 (map 'string #'code-char
      (multiple-value-bind (uri parameters headers) 
          (trade-with-kraken:signature "TradeBalance" '(("asset" . "ZEUR")))
        (drakma:http-request uri :method :post :parameters parameters :additional-headers headers)))
 ```
-```
+```lisp
 (multiple-value-bind (uri content headers) 
     (trade-with-kraken:signature "TradeBalance" '(("asset" . "ZEUR")))
   (dex:post uri :content content :headers headers))
