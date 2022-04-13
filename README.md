@@ -27,7 +27,9 @@ __function signature__
 
 returns arguments needed to send a http resquet
 
-```lisp (trade-with-kraken:signature "TradeBalance" '(("asset" . "ZEUR"))) ```
+```lisp
+(trade-with-kraken:signature "TradeBalance" '(("asset" . "ZEUR")))
+```
 
 you have always the choice between drakma and dexador to send the request
 
