@@ -51,6 +51,5 @@ because Dexador takes so so long to detect that the network is unreachable, i wi
 
 to be continued.
 
-$$ E = mc^2 $$
 
 
